@@ -4,16 +4,30 @@
 	<meta charset="UTF-8">
 	<title>Color the Canvas</title>
 	<style type="text/css">
-
+		#canvas {
+			/*height: 100%;*/
+			/*border: 1px solid red;*/
+		}
+		.panel{
+			margin-top: 20px;
+			margin-right: 20px;
+			position: fixed;
+			top: 0;
+			right: 0;
+		}
 	</style>
 </head>
 <body>
 	<canvas id="canvas" height="800" width="800">
 		
 	</canvas>
+	<div class="panel">
+		<button id="clearAll"> Clear Slate</button>
+	</div>
 
 <script type="text/javascript">
 	const canvas = document.querySelector('#canvas');
+	const clear = document.querySelector('#clearAll');
 	const ctx = canvas.getContext('2d');
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -53,6 +67,12 @@
 			ctx.lineWidth--;
 		}
 	}
+	function clearAll() {
+		
+		[canvas.width, canvas.height] = [canvas.width, canvas.height];
+		ctx.lineJoin = 'round';
+		ctx.lineCap = 'round';
+	}
 
 	canvas.addEventListener('mousedown', (e) => {
 		isDrawing = true;
@@ -62,6 +82,7 @@
 	canvas.addEventListener('mousemove', draw);
 	canvas.addEventListener('mouseup', _ => isDrawing = false);
 	canvas.addEventListener('mouseout', _ => isDrawing = false);
+	clear.addEventListener('click', clearAll);
 
 </script>
 </body>
